@@ -8,6 +8,7 @@ Created on Sun Jan 19 13:19:27 2020
 #import sys
 #sys.path.insert(0, '../Data') #path to datasets
 import pandas as pd
+import util
 
 #####################
 # PATH TO DATAFILES #
@@ -66,7 +67,7 @@ GRADES = ['Primary_Category', 'Is_High_School', 'Is_Middle_School',
 # READ AND CLEAN:         #
 #   School Year 2018-2019 #
 ###########################
-df = pd.read_csv(CPS_RAW_1819)
+df = util.read_csv(CPS_RAW_1819, col_types={'School_ID':str})
 
 ''' CHECK '''
 df.shape # 654x92
@@ -79,40 +80,42 @@ df.Rating_Status.value_counts() # 125 with value "Not Applicable"
 
 
 ''' ADD ATTRIBUTES '''
-# Add School Year
-df['schoolyear'] = '2018-2019'
+def add_attributes(df, schoolyear):
+    '''
+    Add schoolyear and demographics info
 
-# Add % Demographics
-dmg_perc_cols = {'Student_Count_Low_Income': '%low_inc', \
-                 'Student_Count_Special_Ed': '%special_ed', \
-                 'Student_Count_English_Learners': '%esl', \
-                 'Student_Count_Black': '%black', \
-                 'Student_Count_Hispanic': '%hisp', \
-                 'Student_Count_White': '%white', \
-                 'Student_Count_Asian': '%asian', \
-                 'Student_Count_Native_American': '%native', \
-                 'Student_Count_Other_Ethnicity': '%other', \
-                 'Student_Count_Asian_Pacific_Islander': '%as.pacif', \
-                 'Student_Count_Multi': '%multirace', \
-                 'Student_Count_Hawaiian_Pacific_Islander': '%hw.pacif', \
-                 'Student_Count_Ethnicity_Not_Available': '%na'}
+    INPUTS: cps_df, schoolyear as YYYY-YYYY (str)
+    '''
+    # Add School Year
+    df['schoolyear'] = schoolyear
 
-for count, perc in dmg_perc_cols.items():
-    df[perc] = df[count] / df['Student_Count_Total']
+    # Add % Demographics
+    dmg_perc_cols = {'Student_Count_Low_Income': '%low_inc', \
+                     'Student_Count_Special_Ed': '%special_ed', \
+                     'Student_Count_English_Learners': '%esl', \
+                     'Student_Count_Black': '%black', \
+                     'Student_Count_Hispanic': '%hisp', \
+                     'Student_Count_White': '%white', \
+                     'Student_Count_Asian': '%asian', \
+                     'Student_Count_Native_American': '%native', \
+                     'Student_Count_Other_Ethnicity': '%other', \
+                     'Student_Count_Asian_Pacific_Islander': '%as.pacif', \
+                     'Student_Count_Multi': '%multirace', \
+                     'Student_Count_Hawaiian_Pacific_Islander': '%hw.pacif', \
+                     'Student_Count_Ethnicity_Not_Available': '%na'}
+
+    for count, perc in dmg_perc_cols.items():
+        df[perc] = df[count] / df['Student_Count_Total']
+
+    # Add Majority Race column
+    df.loc[(df['%black'] > 0.5), 'majority_race'] = 'majority_black'
+    df.loc[(df['%hisp'] > 0.5), 'majority_race'] = 'majority_hisp'
+    df.loc[(df['%white'] > 0.5), 'majority_race'] = 'majority_white'
+    df['majority_race'].fillna('no_majority', inplace = True)
+
+    return df
+
 
 new_cols = ['%low_inc', '%special_ed', '%esl', '%black', '%hisp', '%white', '%asian', \
-                 '%native', '%other', '%as.pacif', '%multirace', '%hw.pacif', '%na']
+            '%native', '%other', '%as.pacif', '%multirace', '%hw.pacif', '%na']
 
-
-def read_csv(filename, cols=None):
-  '''
-  Inputs:
-    name of file (str)--must end in .csv
-    columns to include from original (list)--if not specified, read all cols
-  Outpts:
-  '''
-  if not cols:
-    df = pd.read_csv(path_to_data(filename))
-  else:
-    df = pd.read_csv(path_to_data(filename), usecols=cols)
-  return df
