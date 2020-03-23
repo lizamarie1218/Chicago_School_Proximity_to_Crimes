@@ -67,16 +67,18 @@ GRADES = ['Primary_Category', 'Is_High_School', 'Is_Middle_School',
 # READ AND CLEAN:         #
 #   School Year 2018-2019 #
 ###########################
-df = util.read_csv(CPS_RAW_1819, col_types={'School_ID':str})
 
-''' CHECK '''
-df.shape # 654x92
-df['School_ID'].nunique()   # Look at uniqueness of School_ID
-df['College_Enrollment_Rate_School'].count() # 166 non-null values
-df['College_Enrollment_Rate_School'].isna().sum() # correctly 488 (missing)
-df['Graduation_Rate_School'].isna().sum() # 512 of 654 missing
-df['Mean_ACT'].isna().sum() # All 654 missing
-df.Rating_Status.value_counts() # 125 with value "Not Applicable"
+def explore_df(data=CPS_RAW_1819):
+    df = util.read_csv(CPS_RAW_1819, col_types={'School_ID':str})
+
+    ''' CHECK '''
+    df.shape # 654x92
+    df['School_ID'].nunique()   # Look at uniqueness of School_ID
+    df['College_Enrollment_Rate_School'].count() # 166 non-null values
+    df['College_Enrollment_Rate_School'].isna().sum() # correctly 488 (missing)
+    df['Graduation_Rate_School'].isna().sum() # 512 of 654 missing
+    df['Mean_ACT'].isna().sum() # All 654 missing
+    df.Rating_Status.value_counts() # 125 with value "Not Applicable"
 
 
 ''' ADD ATTRIBUTES '''

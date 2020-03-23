@@ -1,14 +1,87 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
-    <title>Scaffold</title>
+    <title>Chicago Crimes by Public School</title>
     <meta charset="utf-8">
+    <meta name="description" 
+        content="Viewing Chicago's crimes by their proximity to a public school.">
+    <meta name="author" content="Liza Marie Soriano">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="src/stylesheets/main.css" />
+
+    <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <!-- Import vega-embed -->
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
   </head>
+
   <body>
-    <div id="app"></div>
-    <script src="bundle.js"></script>
-    
-    <div> Hi there -- still working on stuff </div>
+    <span class="title1">
+      <b> Chicago Public School Outcomes by their Proximity to Violent Crimes</b>
+      </br></br>
+    </span>
+
+    <div class="section">
+      <span class="title2"><b>College Persistence Rates - Class of 2017 Cohort</b></span>
+      <div class="text">
+        The scatterplot on the righthand side shows the college persistence rates of students from each Chicago Public High School displayed. College persistence rates are defined as the proportion of students from the 2017 cohort who are still enrolled in college during the Fall after their freshamn year (i.e. the start of what would be their sophomore year). Persistence rates are plotted against the number of violent crimes reported around each high school. Violent crimes include assaults, battery, robbery, homicide, and sexual assaults.</br></br>
+        The lefthand side map plots the locations of CPS schools while denoting the level of violent crimes reported around their area. Levels are low, medium, high depending on where each school area crime count fell in the distribution of all schools. Low crime areas therefore represent the bottom third of crime counts around CPS schools, while high crime areas represent the top third of crime counts.
+        </br></br>
+        Clicking on the points on either chart (the map or the chart) highlights the selected school on both plots. Hovering over the points also displays a tooltip that shows school name and crime count/level. You can also zoom in and out of the scatterplot to disentangle some of the more clustered points.
+      </div>
+      <div class="graphic" id="vis1"></div>
+      <div class="text">
+        write here
+      </div>
+    </div>
+
+    <div class="section">
+      <span class="title2"><b>High School Graduation Rates - Class of 2017 Cohort</b></span>
+      <div class="text">
+        Click anywhere on the lefthand legend to toggle between different combinations of low-to-high graudation rates and low-to-high violent crime counts. Conversely, you can click on any dot in the map and observe from the legend what level of nearby violent crime and what level of graduation rate the 2017 cohort experienced during their last two years in high school. 
+      </div>
+      <div class="graphic" id="vis2"></div>
+    </div>
+
+    <div class="section">
+      <span class="title2"><b>Total Crimes within the Voronoi of Each CPS School</b></span>
+      <div class="text">
+        Each 
+      </div>
+      <div class="graphic" id="vis0"><img src="data/voronoi1.png" alt="CPS Voronoi"></div>
+    </div>
+
+    <div class = "footer">
+      <b>Sources:</b></br>
+      <a href="https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-present/ijzp-q8t2/data">
+        City of Chicag Data Portal - Crimes (used data: September 2015 – August 2017) </a></br>
+      <a href="https://data.cityofchicago.org/Education/Chicago-Public-Schools-School-Profile-Information-/8i6r-et8s">
+        City of Chicago Data Portal - CPS Profile Information for Schoolyear 2016-2017 </a></br>
+      <a href="https://cps.edu/SchoolData/Pages/SchoolData.aspx"> 
+        Chicago Public Schools Metrics Data </br>
+        - CPS Cohort Dropout and Graduation Rates, 2015 Method (used data: 5-yr Cohort rates)</br>
+        - College Enrollment and Persistence Data (used data: School Level)</br></a>
+      <a href="https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Community-Areas-current-/cauq-8yn6">
+        Community Area Boundaries </a>
+      </br></br>
+      <i><a href="https://github.com/lizamarie1218/Chicago_School_Proximity_to_Crimes">My GitHub Repo</a></i>
+    </div>
+
+    <script>
+    const spec1 = "data/chart1.json";
+    vegaEmbed("#vis1", spec1)
+      // result.view provides access to the Vega View API
+      .then(result => console.log(result))
+      .catch(console.warn);
+
+    const spec2 = "data/chart2.json"
+    vegaEmbed("#vis2", spec2)
+      // result.view provides access to the Vega View API
+      .then(result => console.log(result))
+      .catch(console.warn);
+    </script>
+
   </body>
 </html>
+

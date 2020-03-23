@@ -7,8 +7,73 @@ html,
 body {
   background: #D6D6CE;
   font-family: Verdana, Geneva, sans-serif;
+  font-size:15px;
   height: 100%;
   margin: 0;
   padding: 0;
   width: 100%;
+  background-color: #FFFFFF;
+}
+
+svg {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+}
+
+.title1{
+	font-size:30px;
+	display: flex;
+	justify-content: center;
+}
+
+.title2{
+	font-size:20px;
+	display: flex;
+	justify-content: center;
+}
+
+.graphic {
+	display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.text {
+	font-size:15px;
+	display: flex;
+	justify-content: center;
+	padding-left: 100px;
+	padding-right: 100px;
+}
+
+.section {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.footer {
+	padding-bottom: 12px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-top: 20px;
+}
+
+
+/* links */
+a:link {
+	font-size:13px;
+    color: #069695;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #7854b3;
+}
+
+a:hover {
+	color: #99d8c9;
+    text-decoration: underline;
 }
