@@ -3,18 +3,18 @@
   "background": "white",
   "padding": 5,
   "title": {
+    "anchor": "middle",
     "text": [
       "",
       "Chicago Public High Schools Graduation Rate vs. Adjacent Violent Crimes"
     ],
     "subtitle": ["[Source: City of Chicago Data Portal, CPS.edu School Data]"],
     "color": "#069695",
-    "subtitleColor": "#7854b3",
-    "anchor": "start"
+    "subtitleColor": "#7854b3"
   },
   "data": [
-    {"name": "selector398_store"},
-    {"name": "selector397_store"},
+    {"name": "selector406_store"},
+    {"name": "selector405_store"},
     {
       "name": "data-914dc826b0d6273617e303f2abc25f6e",
       "format": {},
@@ -17805,7 +17805,7 @@
       "transform": [
         {
           "type": "filter",
-          "expr": "!(length(data(\"selector397_store\"))) || (vlSelectionTest(\"selector397_store\", datum))"
+          "expr": "!(length(data(\"selector405_store\"))) || (vlSelectionTest(\"selector405_store\", datum))"
         }
       ]
     },
@@ -17874,12 +17874,12 @@
       ]
     },
     {
-      "name": "selector398",
-      "update": "vlSelectionResolve(\"selector398_store\", \"union\", true)"
+      "name": "selector406",
+      "update": "vlSelectionResolve(\"selector406_store\", \"union\", true)"
     },
     {
-      "name": "selector397",
-      "update": "vlSelectionResolve(\"selector397_store\", \"union\")"
+      "name": "selector405",
+      "update": "vlSelectionResolve(\"selector405_store\", \"union\")"
     }
   ],
   "layout": {"padding": 20, "bounds": "full", "align": "each"},
@@ -17896,11 +17896,11 @@
       },
       "signals": [
         {
-          "name": "selector398_tuple",
+          "name": "selector406_tuple",
           "on": [
             {
               "events": [{"source": "scope", "type": "click"}],
-              "update": "datum && item().mark.marktype !== 'group' ? {unit: \"concat_0\", fields: selector398_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)[\"graduation_level_label\"], (item().isVoronoi ? datum.datum : datum)[\"vcrimes_level_label\"]]} : null",
+              "update": "datum && item().mark.marktype !== 'group' ? {unit: \"concat_0\", fields: selector406_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)[\"graduation_level_label\"], (item().isVoronoi ? datum.datum : datum)[\"vcrimes_level_label\"]]} : null",
               "force": true
             },
             {
@@ -17910,14 +17910,14 @@
           ]
         },
         {
-          "name": "selector398_tuple_fields",
+          "name": "selector406_tuple_fields",
           "value": [
             {"type": "E", "field": "graduation_level_label"},
             {"type": "E", "field": "vcrimes_level_label"}
           ]
         },
         {
-          "name": "selector398_toggle",
+          "name": "selector406_toggle",
           "value": false,
           "on": [
             {
@@ -17931,11 +17931,11 @@
           ]
         },
         {
-          "name": "selector398_modify",
+          "name": "selector406_modify",
           "on": [
             {
-              "events": {"signal": "selector398_tuple"},
-              "update": "modify(\"selector398_store\", selector398_toggle ? null : selector398_tuple, selector398_toggle ? null : true, selector398_toggle ? selector398_tuple : null)"
+              "events": {"signal": "selector406_tuple"},
+              "update": "modify(\"selector406_store\", selector406_toggle ? null : selector406_tuple, selector406_toggle ? null : true, selector406_toggle ? selector406_tuple : null)"
             }
           ]
         }
@@ -17951,7 +17951,7 @@
             "update": {
               "fill": [
                 {
-                  "test": "!(length(data(\"selector398_store\"))) || (vlSelectionTest(\"selector398_store\", datum))",
+                  "test": "!(length(data(\"selector406_store\"))) || (vlSelectionTest(\"selector406_store\", datum))",
                   "scale": "color",
                   "field": "graduation_level_number"
                 },
@@ -17999,11 +17999,11 @@
       },
       "signals": [
         {
-          "name": "selector397_tuple",
+          "name": "selector405_tuple",
           "on": [
             {
               "events": [{"source": "scope", "type": "click"}],
-              "update": "datum && item().mark.marktype !== 'group' ? {unit: \"concat_1_layer_1\", fields: selector397_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)[\"School_ID\"]]} : null",
+              "update": "datum && item().mark.marktype !== 'group' ? {unit: \"concat_1_layer_1\", fields: selector405_tuple_fields, values: [(item().isVoronoi ? datum.datum : datum)[\"School_ID\"]]} : null",
               "force": true
             },
             {
@@ -18013,15 +18013,15 @@
           ]
         },
         {
-          "name": "selector397_tuple_fields",
+          "name": "selector405_tuple_fields",
           "value": [{"type": "E", "field": "School_ID"}]
         },
         {
-          "name": "selector397_modify",
+          "name": "selector405_modify",
           "on": [
             {
-              "events": {"signal": "selector397_tuple"},
-              "update": "modify(\"selector397_store\", selector397_tuple, true)"
+              "events": {"signal": "selector405_tuple"},
+              "update": "modify(\"selector405_store\", selector405_tuple, true)"
             }
           ]
         }
@@ -18053,7 +18053,7 @@
               "fill": {"value": "transparent"},
               "stroke": [
                 {
-                  "test": "!(length(data(\"selector398_store\"))) || (vlSelectionTest(\"selector398_store\", datum))",
+                  "test": "!(length(data(\"selector406_store\"))) || (vlSelectionTest(\"selector406_store\", datum))",
                   "scale": "color",
                   "field": "graduation_level_number"
                 },
@@ -18109,5 +18109,43 @@
       "paddingOuter": 0
     }
   ],
-  "config": {"style": {"group-title": {"subtitleFontSize": 12}}}
+  "config": {
+    "legend": {
+      "labelFont": "Palatino",
+      "labelFontSize": 12,
+      "symbolSize": 100,
+      "titleFont": "Georgia",
+      "titleFontSize": 12,
+      "rowPadding": 4,
+      "orient": "right",
+      "offset": 15
+    },
+    "style": {
+      "group-title": {
+        "fontSize": 16,
+        "font": "Georgia",
+        "fontColor": "#069695",
+        "subtitleFontSize": 12
+      }
+    },
+    "range": {
+      "category": [
+        "#ffb14e",
+        "#578ceb",
+        "#ff5aaa",
+        "#be176f",
+        "#7854b3",
+        "#069695",
+        "#99d8c9"
+      ],
+      "diverging": [
+        "#cfe8f3",
+        "#a2d4ec",
+        "#73bfe2",
+        "#46abdb",
+        "#1696d2",
+        "#12719e"
+      ]
+    }
+  }
 }
